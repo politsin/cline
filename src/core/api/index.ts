@@ -151,6 +151,7 @@ function createHandlerForProvider(
 		case "openai-native":
 			return new OpenAiNativeHandler({
 				openAiNativeApiKey: options.openAiNativeApiKey,
+				openAiBaseUrl: options.openAiBaseUrl,
 				reasoningEffort: mode === "plan" ? options.planModeReasoningEffort : options.actModeReasoningEffort,
 				apiModelId: mode === "plan" ? options.planModeApiModelId : options.actModeApiModelId,
 			})

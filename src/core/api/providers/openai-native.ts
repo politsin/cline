@@ -10,6 +10,7 @@ import { ApiStream } from "../transform/stream"
 
 interface OpenAiNativeHandlerOptions {
 	openAiNativeApiKey?: string
+	openAiBaseUrl?: string
 	reasoningEffort?: string
 	apiModelId?: string
 }
@@ -23,18 +24,26 @@ export class OpenAiNativeHandler implements ApiHandler {
 	}
 
 	private ensureClient(): OpenAI {
-		if (!this.client) {
-			if (!this.options.openAiNativeApiKey) {
-				throw new Error("OpenAI API key is required")
-			}
-			try {
-				this.client = new OpenAI({
-					apiKey: this.options.openAiNativeApiKey,
-				})
-			} catch (error: any) {
-				throw new Error(`Error creating OpenAI client: ${error.message}`)
-			}
+		if (!this.options.openAiNativeApiKey) {
+			throw new Error("OpenAI API key is required")
 		}
+
+		// Принудительно пересоздаем клиент каждый раз для отладки
+		console.log("🔍 OpenAI Native Debug - Creating new client")
+		console.log("🔍 OpenAI Native Debug - baseURL:", this.options.openAiBaseUrl)
+		console.log("🔍 OpenAI Native Debug - apiKey:", this.options.openAiNativeApiKey ? "***SET***" : "NOT SET")
+
+		try {
+			this.client = new OpenAI({
+				baseURL: this.options.openAiBaseUrl,
+				apiKey: this.options.openAiNativeApiKey,
+			})
+			console.log("🔍 OpenAI Native Debug - Client created successfully")
+		} catch (error: any) {
+			console.log("🔍 OpenAI Native Debug - Error creating client:", error.message)
+			throw new Error(`Error creating OpenAI client: ${error.message}`)
+		}
+
 		return this.client
 	}
 
@@ -59,6 +68,10 @@ export class OpenAiNativeHandler implements ApiHandler {
 	async *createMessage(systemPrompt: string, messages: Anthropic.Messages.MessageParam[]): ApiStream {
 		const client = this.ensureClient()
 		const model = this.getModel()
+
+		console.log("🔍 OpenAI Native Debug - Starting createMessage")
+		console.log("🔍 OpenAI Native Debug - Model:", model.id)
+		console.log("🔍 OpenAI Native Debug - Client baseURL:", (client as any).baseURL)
 
 		switch (model.id) {
 			case "o1":

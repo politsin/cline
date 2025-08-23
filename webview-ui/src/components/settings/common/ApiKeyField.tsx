@@ -29,7 +29,7 @@ export const ApiKeyField = ({
 	return (
 		<div>
 			<VSCodeTextField
-				onInput={(e: any) => setLocalValue(e.target.value)}
+				onChange={(e: any) => setLocalValue(e.target.value)}
 				placeholder={placeholder}
 				required={true}
 				style={{ width: "100%" }}

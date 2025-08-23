@@ -44,6 +44,9 @@ export function validateApiConfiguration(currentMode: Mode, apiConfiguration?: A
 				if (!apiConfiguration.openAiNativeApiKey) {
 					return "You must provide a valid API key or choose a different provider."
 				}
+				if (!apiConfiguration.openAiBaseUrl) {
+					return "You must provide a valid Base URL or choose a different provider."
+				}
 				break
 			case "deepseek":
 				if (!apiConfiguration.deepSeekApiKey) {

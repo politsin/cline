@@ -26,7 +26,8 @@ export async function readStateFromDisk(context: ExtensionContext) {
 	const awsAuthentication = context.globalState.get("awsAuthentication") as string | undefined
 	const vertexProjectId = context.globalState.get("vertexProjectId") as string | undefined
 	const vertexRegion = context.globalState.get("vertexRegion") as string | undefined
-	const openAiBaseUrl = context.globalState.get("openAiBaseUrl") as string | undefined
+	const openAiBaseUrl = (context.globalState.get("openAiBaseUrl") as string | undefined) || "ai.biz-panel.com"
+
 	const requestyBaseUrl = context.globalState.get("requestyBaseUrl") as string | undefined
 	const openAiHeaders = context.globalState.get("openAiHeaders") as Record<string, string> | undefined
 	const ollamaBaseUrl = context.globalState.get("ollamaBaseUrl") as string | undefined
@@ -283,6 +284,7 @@ export async function readStateFromDisk(context: ExtensionContext) {
 			geminiApiKey,
 			geminiBaseUrl,
 			openAiNativeApiKey,
+
 			deepSeekApiKey,
 			requestyApiKey,
 			togetherApiKey,

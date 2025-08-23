@@ -13,7 +13,16 @@ import { main as generateProtoBusSetup } from "./generate-protobus-setup.mjs"
 import { loadProtoDescriptorSet } from "./proto-utils.mjs"
 
 const require = createRequire(import.meta.url)
-const PROTOC = path.join(require.resolve("grpc-tools"), "../bin/protoc")
+// Try to use global protoc first, fallback to local
+let PROTOC
+try {
+	// Try to use global protoc
+	execSync("protoc --version", { stdio: "ignore" })
+	PROTOC = "protoc"
+} catch (error) {
+	// Fallback to local protoc
+	PROTOC = path.join(require.resolve("grpc-tools"), "../bin/protoc")
+}
 
 const PROTO_DIR = path.resolve("proto")
 const TS_OUT_DIR = path.resolve("src/shared/proto")

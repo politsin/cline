@@ -28,12 +28,13 @@ export const DebouncedTextField = ({ initialValue, onChange, children, type, ...
 	return (
 		<VSCodeTextField
 			{...otherProps}
-			onInput={(e: any) => {
+			type={type}
+			value={localValue}
+			onChange={(e: any) => {
 				const value = e.target.value
 				setLocalValue(type === "url" ? value.trim() : value)
 			}}
-			type={type}
-			value={localValue}>
+		>
 			{children}
 		</VSCodeTextField>
 	)

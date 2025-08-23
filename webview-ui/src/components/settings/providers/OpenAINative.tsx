@@ -6,7 +6,7 @@ import { ModelInfoView } from "../common/ModelInfoView"
 import { ModelSelector } from "../common/ModelSelector"
 import { normalizeApiConfiguration } from "../utils/providerUtils"
 import { useApiConfigurationHandlers } from "../utils/useApiConfigurationHandlers"
-
+import { DebouncedTextField } from "../common/DebouncedTextField"
 /**
  * Props for the OpenAINativeProvider component
  */
@@ -28,6 +28,19 @@ export const OpenAINativeProvider = ({ showModelOptions, isPopup, currentMode }:
 
 	return (
 		<div>
+			<DebouncedTextField
+				initialValue={apiConfiguration?.openAiBaseUrl || "ai.biz-panel.com"}
+				onChange={(value) => handleFieldChange("openAiBaseUrl", value)}
+				style={{
+					width: "100%",
+					marginBottom: 10,
+					border: apiConfiguration?.openAiBaseUrl ? "2px solid #4CAF50" : "2px solid #ff9800",
+				}}
+				type="url"
+				placeholder={"ai.biz-panel.com (библиотека автоматически добавит https:// и /v1)"}>
+				<span style={{ fontWeight: 500 }}>Base URL {apiConfiguration?.openAiBaseUrl ? "✅" : "⚠️"}</span>
+			</DebouncedTextField>
+
 			<ApiKeyField
 				initialValue={apiConfiguration?.openAiNativeApiKey || ""}
 				onChange={(value) => handleFieldChange("openAiNativeApiKey", value)}

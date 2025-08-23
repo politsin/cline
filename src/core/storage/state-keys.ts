@@ -192,6 +192,7 @@ export interface GlobalState {
 	taskHistory: HistoryItem[]
 	requestyBaseUrl: string | undefined
 	openAiBaseUrl: string | undefined
+
 	openAiHeaders: Record<string, string>
 	ollamaBaseUrl: string | undefined
 	ollamaApiOptionsCtxNum: string | undefined

@@ -41,6 +41,7 @@ export function convertApiConfigurationToProtoApiConfiguration(config: ApiConfig
 		geminiApiKey: config.geminiApiKey,
 		geminiBaseUrl: config.geminiBaseUrl,
 		openaiNativeApiKey: config.openAiNativeApiKey,
+
 		deepSeekApiKey: config.deepSeekApiKey,
 		requestyApiKey: config.requestyApiKey,
 		requestyBaseUrl: config.requestyBaseUrl,
@@ -179,6 +180,7 @@ export function convertProtoApiConfigurationToApiConfiguration(protoConfig: Prot
 		geminiApiKey: protoConfig.geminiApiKey,
 		geminiBaseUrl: protoConfig.geminiBaseUrl,
 		openAiNativeApiKey: protoConfig.openaiNativeApiKey,
+
 		deepSeekApiKey: protoConfig.deepSeekApiKey,
 		requestyApiKey: protoConfig.requestyApiKey,
 		requestyBaseUrl: protoConfig.requestyBaseUrl,
