@@ -45,6 +45,8 @@ webview-ui/package.json
 webview-ui/package-lock.json
 webview-ui/node_modules/**
 **/.gitignore
+.idea/**
+webview-ui/tsconfig.app.tsbuildinfo
 
 # Ignore docs
 docs/**
