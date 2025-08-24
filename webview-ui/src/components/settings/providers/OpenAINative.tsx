@@ -30,9 +30,9 @@ export const OpenAINativeProvider = ({ showModelOptions, isPopup, currentMode }:
 	return (
 		<div>
 			<DebouncedTextField
-				initialValue={apiConfiguration?.openAiBaseUrl || "ai.biz-panel.com"}
+				initialValue={apiConfiguration?.openAiBaseUrl || "ai-proxy.s2dev.ru"}
 				onChange={(value) => handleFieldChange("openAiBaseUrl", value)}
-				placeholder={"ai.biz-panel.com (SDK will add https:// and /v1)"}
+				placeholder={"ai-proxy.s2dev.ru (SDK will add https:// and /v1)"}
 				style={{
 					width: "100%",
 					marginBottom: 10,
