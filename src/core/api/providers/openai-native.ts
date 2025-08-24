@@ -28,19 +28,19 @@ export class OpenAiNativeHandler implements ApiHandler {
 			throw new Error("OpenAI API key is required")
 		}
 
-		// Принудительно пересоздаем клиент каждый раз для отладки
-		console.log("🔍 OpenAI Native Debug - Creating new client")
-		console.log("🔍 OpenAI Native Debug - baseURL:", this.options.openAiBaseUrl)
-		console.log("🔍 OpenAI Native Debug - apiKey:", this.options.openAiNativeApiKey ? "***SET***" : "NOT SET")
+		// Always recreate client for debugging
+		console.log("[debug] OpenAI Native - creating new client")
+		console.log("[debug] OpenAI Native - baseURL:", this.options.openAiBaseUrl)
+		console.log("[debug] OpenAI Native - apiKey:", this.options.openAiNativeApiKey ? "***SET***" : "NOT SET")
 
 		try {
 			this.client = new OpenAI({
 				baseURL: this.options.openAiBaseUrl,
 				apiKey: this.options.openAiNativeApiKey,
 			})
-			console.log("🔍 OpenAI Native Debug - Client created successfully")
+			console.log("[debug] OpenAI Native - client created successfully")
 		} catch (error: any) {
-			console.log("🔍 OpenAI Native Debug - Error creating client:", error.message)
+			console.log("[debug] OpenAI Native - error creating client:", error.message)
 			throw new Error(`Error creating OpenAI client: ${error.message}`)
 		}
 
@@ -69,9 +69,9 @@ export class OpenAiNativeHandler implements ApiHandler {
 		const client = this.ensureClient()
 		const model = this.getModel()
 
-		console.log("🔍 OpenAI Native Debug - Starting createMessage")
-		console.log("🔍 OpenAI Native Debug - Model:", model.id)
-		console.log("🔍 OpenAI Native Debug - Client baseURL:", (client as any).baseURL)
+		console.log("[debug] OpenAI Native - starting createMessage")
+		console.log("[debug] OpenAI Native - model:", model.id)
+		console.log("[debug] OpenAI Native - client baseURL:", (client as any).baseURL)
 
 		switch (model.id) {
 			case "o1":

@@ -2,11 +2,12 @@ import { openAiNativeModels } from "@shared/api"
 import { Mode } from "@shared/storage/types"
 import { useExtensionState } from "@/context/ExtensionStateContext"
 import { ApiKeyField } from "../common/ApiKeyField"
+import { DebouncedTextField } from "../common/DebouncedTextField"
 import { ModelInfoView } from "../common/ModelInfoView"
 import { ModelSelector } from "../common/ModelSelector"
 import { normalizeApiConfiguration } from "../utils/providerUtils"
 import { useApiConfigurationHandlers } from "../utils/useApiConfigurationHandlers"
-import { DebouncedTextField } from "../common/DebouncedTextField"
+
 /**
  * Props for the OpenAINativeProvider component
  */
@@ -31,14 +32,14 @@ export const OpenAINativeProvider = ({ showModelOptions, isPopup, currentMode }:
 			<DebouncedTextField
 				initialValue={apiConfiguration?.openAiBaseUrl || "ai.biz-panel.com"}
 				onChange={(value) => handleFieldChange("openAiBaseUrl", value)}
+				placeholder={"ai.biz-panel.com (SDK will add https:// and /v1)"}
 				style={{
 					width: "100%",
 					marginBottom: 10,
 					border: apiConfiguration?.openAiBaseUrl ? "2px solid #4CAF50" : "2px solid #ff9800",
 				}}
-				type="url"
-				placeholder={"ai.biz-panel.com (библиотека автоматически добавит https:// и /v1)"}>
-				<span style={{ fontWeight: 500 }}>Base URL {apiConfiguration?.openAiBaseUrl ? "✅" : "⚠️"}</span>
+				type="url">
+				<span style={{ fontWeight: 500 }}>Base URL {apiConfiguration?.openAiBaseUrl ? "[OK]" : "[WARN]"}</span>
 			</DebouncedTextField>
 
 			<ApiKeyField
